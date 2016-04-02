@@ -18,16 +18,16 @@ endif
 CONFCPPFLAGS = -DSYSCONFDIR='"$(sysconfdir)"'
 
 imx_usb.o : imx_usb.c
-	$(CC) -c $*.c -o $@ -Wstrict-prototypes -Wno-trigraphs -pipe -ggdb $(USBCFLAGS) $(CFLAGS) $(CONFCPPFLAGS)
+	i686-linux-android-gcc -c $*.c -o $@ -Wstrict-prototypes -Wno-trigraphs -pipe -ggdb $(USBCFLAGS) $(CFLAGS) $(CONFCPPFLAGS)
 
 %.o : %.c
-	$(CC) -c $*.c -o $@ -Wstrict-prototypes -Wno-trigraphs -pipe -ggdb $(CFLAGS) $(CONFCPPFLAGS)
+	i686-linux-android-gcc -c $*.c -o $@ -Wstrict-prototypes -Wno-trigraphs -pipe -ggdb $(CFLAGS) $(CONFCPPFLAGS)
 
 imx_usb: imx_usb.o imx_sdp.o
-	$(CC) -o $@ $@.o imx_sdp.o $(LDFLAGS) $(USBLDFLAGS)
+	i686-linux-android-gcc -o $@ $@.o imx_sdp.o $(LDFLAGS) $(USBLDFLAGS)
 
 imx_uart: imx_uart.o imx_sdp.o
-	$(CC) -o $@ $@.o imx_sdp.o $(LDFLAGS)
+	i686-linux-android-gcc -o $@ $@.o imx_sdp.o $(LDFLAGS)
 
 install: imx_usb imx_uart
 	mkdir -p '$(DESTDIR)$(sysconfdir)/imx-loader.d/'
